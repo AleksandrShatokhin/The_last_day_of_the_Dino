@@ -1,1 +1,2 @@
-# The_last_day_of_the_Dino
+# The last day of the Dino
+Ludum Dare 50
