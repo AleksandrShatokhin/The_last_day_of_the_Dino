@@ -11,17 +11,24 @@ public class Object : MonoBehaviour
         player = GameObject.Find("Player");
     }
 
-    private void OnDestroy()
-    {
-        player.GetComponent<PlayerController>().PickUpObject(true);
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == player)
         {
-            player.GetComponent<PlayerController>().PickUpObject(false, this.gameObject.transform);
-            Destroy(this.gameObject, 0.8f);
+            if (!player.GetComponent<PlayerController>().IsPickUpLittleAsteroid())
+            {
+                player.GetComponent<PlayerController>().PickUpObject(false, this.gameObject.transform);
+                Destroy(this.gameObject, 0.8f);
+            }
+            else
+            {
+                Debug.Log("Вы не можете нести больше одного обломка");
+            }
         }
+    }
+
+    private void OnDestroy()
+    {
+        player.GetComponent<PlayerController>().PickUpObject(true);
     }
 }
