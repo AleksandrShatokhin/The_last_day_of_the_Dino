@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private Animator anim_Dino;
 
     private bool isCanMove;
+    private bool isCanJump;
     [SerializeField] private bool isPickUpLittleAsteroid;
     [SerializeField] private float speedDino;
 
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private const string isRun = "isRun";
     private const string isPickUp = "isPickUp";
     private const string isThrow = "isThrow";
+    private const string isJump = "isJump";
 
     private void Start()
     {
@@ -25,7 +27,16 @@ public class PlayerController : MonoBehaviour
         anim_Dino = GetComponentInChildren<Animator>();
 
         isCanMove = true;
+        isCanJump = false;
         isPickUpLittleAsteroid = false;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && isCanJump)
+        {
+            Jump();
+        }
     }
 
     private void FixedUpdate()
@@ -62,6 +73,14 @@ public class PlayerController : MonoBehaviour
         {
             anim_Dino.SetBool(isRun, false);
         }
+    }
+
+    public void Jump()
+    {
+        isCanMove = false;
+        anim_Dino.SetTrigger(isJump);
+        rb_Dino.AddForce((transform.up + transform.forward) * 5.0f, ForceMode.Impulse);
+        StartCoroutine(RecoverMove());
     }
 
     // вариант 1
@@ -104,6 +123,12 @@ public class PlayerController : MonoBehaviour
         }
 
         return isCanMove;
+    }
+
+    public bool IsCanJump(bool variable)
+    {
+        isCanJump = variable;
+        return isCanJump;
     }
 
     public bool IsPickUpLittleAsteroid()

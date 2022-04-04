@@ -10,7 +10,7 @@ public class ObjectNoTrigger : MonoBehaviour
     void Start()
     {
         startPos = transform.position;
-        endPos = GameObject.Find("LittleSmoke").GetComponent<Transform>().position;
+        endPos = GameObject.Find("PS_LittleSmoke").GetComponent<Transform>().position;
         step = 0;
     }
 
@@ -23,6 +23,7 @@ public class ObjectNoTrigger : MonoBehaviour
         }
         else
         {
+            GameController.GetInstance().Counter(1);
             Destroy(this.gameObject);
         }
     }
