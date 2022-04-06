@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb_Dino;
     private Animator anim_Dino;
 
+    [SerializeField] private AudioClip audioCastAsteroid, audioJump;
+
     private bool isCanMove;
     private bool isCanJump;
     [SerializeField] private bool isPickUpLittleAsteroid;
@@ -78,6 +80,7 @@ public class PlayerController : MonoBehaviour
     public void Jump()
     {
         isCanMove = false;
+        GameController.GetInstance().AudioGame(audioJump);
         anim_Dino.SetTrigger(isJump);
         rb_Dino.AddForce((transform.up + transform.forward) * 5.0f, ForceMode.Impulse);
         StartCoroutine(RecoverMove());
@@ -150,6 +153,7 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(delay);
         Instantiate(asteroid, spawnAsteroid.transform.position, Quaternion.identity);
+        GameController.GetInstance().AudioGame(audioCastAsteroid);
     }
 
     public bool ThrowObject(bool variable, Transform positionObject)

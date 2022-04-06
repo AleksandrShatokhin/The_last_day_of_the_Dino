@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class Object : MonoBehaviour
 {
+    private const string youCanNotPickupStone = "Вы не можете нести больше одного обломка";
+
     [SerializeField] private GameObject ps_ContactWithSand;
     [SerializeField] private ParticleSystem ps_Tail;
     private GameObject player;
+
+    [SerializeField] private AudioClip audioFall;
 
     private void Start()
     {
@@ -17,6 +21,8 @@ public class Object : MonoBehaviour
     {
         if (collision.gameObject.layer == (int)Layers.Ground)
         {
+            GameController.GetInstance().AudioGame(audioFall);
+
             Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y - 0.2f, transform.position.z);
 
             ps_Tail.Stop();
@@ -35,7 +41,7 @@ public class Object : MonoBehaviour
             }
             else
             {
-                Debug.Log("Вы не можете нести больше одного обломка");
+                GameController.GetInstance().ShowInfoOnScreen(youCanNotPickupStone);
             }
         }
     }

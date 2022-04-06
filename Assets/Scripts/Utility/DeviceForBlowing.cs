@@ -5,6 +5,7 @@ using UnityEngine;
 public class DeviceForBlowing : MonoBehaviour
 {
     [SerializeField] private Animator anim_Device;
+    [SerializeField] private AudioClip audioBoom;
 
 
     private void OnTriggerEnter(Collider other)
@@ -14,6 +15,8 @@ public class DeviceForBlowing : MonoBehaviour
             other.GetComponent<PlayerController>().Jump();
             anim_Device.SetTrigger("isClick");
             GameController.GetInstance().Counter(-5);
+            GameController.GetInstance().GetShakeCamera();
+            GameController.GetInstance().AudioGame(audioBoom);
         }
     }
 }

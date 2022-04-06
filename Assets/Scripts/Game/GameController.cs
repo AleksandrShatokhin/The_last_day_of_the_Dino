@@ -8,10 +8,18 @@ public class GameController : MonoBehaviour
     public static GameController GetInstance() => instance;
 
 
+    private AudioSource gameAudio;
+    [SerializeField] private AudioClip audioEndGame;
+
+    private const string completeStone = "Обломков достаточно, можно прыгать на рычаг!";
+    private const string needPickupStone = "Нужно снова собрать камни!";
+
     [SerializeField] private int counterAsteroid;
     private GameObject triggerThrow, triggerJump, triggerClick;
 
     [SerializeField] private GameObject mainui;
+    [SerializeField] private GameObject cameraMain;
+    [SerializeField] private GameObject windowEndGame;
 
     private void Awake()
     {
@@ -20,6 +28,8 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        gameAudio = GetComponent<AudioSource>();
+
         counterAsteroid = 0;
 
         triggerThrow = GameObject.Find("TriggerForTheThrow");
@@ -32,10 +42,11 @@ public class GameController : MonoBehaviour
     public void Counter(int quantity)
     {
         counterAsteroid += quantity;
+        mainui.GetComponent<MainUI>().CounterAsteroidInVolcano(counterAsteroid);
 
         if (counterAsteroid == 5)
         {
-            Debug.Log("Загружено достаточно камней!");
+            ShowInfoOnScreen(completeStone);
 
             triggerThrow.GetComponent<BoxCollider>().enabled = false;
             triggerJump.GetComponent<BoxCollider>().enabled = true;
@@ -44,7 +55,7 @@ public class GameController : MonoBehaviour
 
         if (counterAsteroid == 0)
         {
-            Debug.Log("Нужно снова собрать камни!");
+            ShowInfoOnScreen(needPickupStone);
 
             triggerThrow.GetComponent<BoxCollider>().enabled = true;
             triggerJump.GetComponent<BoxCollider>().enabled = false;
@@ -56,5 +67,27 @@ public class GameController : MonoBehaviour
     public void GetMainUI()
     {
         mainui.GetComponent<MainUI>().ChangeSlider(5);
+    }
+
+    public void GetShakeCamera()
+    {
+        cameraMain.GetComponent<CameraController>().ShakeCamera();
+    }
+
+    public void ShowInfoOnScreen(string info)
+    {
+        mainui.GetComponent<MainUI>().ShowInfoText(info);
+    }
+
+    public void EndGame()
+    {
+        Instantiate(windowEndGame, transform.position, transform.rotation);
+        AudioGame(audioEndGame);
+        Time.timeScale = 0.0f;
+    }
+
+    public void AudioGame(AudioClip audio)
+    {
+        gameAudio.PlayOneShot(audio, 0.5f);
     }
 }

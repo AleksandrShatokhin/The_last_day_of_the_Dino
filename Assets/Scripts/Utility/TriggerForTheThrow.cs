@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TriggerForTheThrow : MonoBehaviour
 {
+    private const string noStone = "Нет обломков!";
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
@@ -14,7 +16,7 @@ public class TriggerForTheThrow : MonoBehaviour
             }
             else
             {
-                Debug.Log("Нет обломков!");
+                GameController.GetInstance().ShowInfoOnScreen(noStone);
             }
         }
     }
