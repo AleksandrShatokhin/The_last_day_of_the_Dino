@@ -60,7 +60,7 @@ public class SpawnLizard : MonoBehaviour
                 Instantiate(lizard, PointInStoperBottom(), Quaternion.identity);
             }
 
-            yield return new WaitForSeconds(5.0f);
+            yield return new WaitForSeconds(7.0f);
         }
     }
 }

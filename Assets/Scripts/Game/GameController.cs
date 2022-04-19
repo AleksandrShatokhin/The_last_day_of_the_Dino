@@ -28,6 +28,8 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1.0f;
+
         gameAudio = GetComponent<AudioSource>();
 
         counterAsteroid = 0;
@@ -66,7 +68,18 @@ public class GameController : MonoBehaviour
 
     public void GetMainUI()
     {
-        mainui.GetComponent<MainUI>().ChangeSlider(5);
+        mainui.GetComponent<MainUI>().ChangeSliderAsteroid(5);
+    }
+
+    public float CheckFeelingFull()
+    {
+        float state = mainui.GetComponent<MainUI>().CheckFeelingFull();
+        return state;
+    }
+
+    public void AddFeelingFull()
+    {
+        mainui.GetComponent<MainUI>().ChangeSliderFeelingFull(5);
     }
 
     public void GetShakeCamera()

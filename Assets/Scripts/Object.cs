@@ -5,6 +5,7 @@ using UnityEngine;
 public class Object : MonoBehaviour
 {
     private const string youCanNotPickupStone = "Вы не можете нести больше одного обломка";
+    private const string youNeedEat = "Слабость. Нужно поесть!";
 
     [SerializeField] private GameObject ps_ContactWithSand;
     [SerializeField] private ParticleSystem ps_Tail;
@@ -36,8 +37,15 @@ public class Object : MonoBehaviour
         {
             if (!player.GetComponent<PlayerController>().IsPickUpLittleAsteroid())
             {
-                player.GetComponent<PlayerController>().PickUpObject(false, this.gameObject.transform);
-                Destroy(this.gameObject, 0.8f);
+                if (GameController.GetInstance().CheckFeelingFull() > 25)
+                {
+                    player.GetComponent<PlayerController>().PickUpObject(false, this.gameObject.transform);
+                    Destroy(this.gameObject, 0.8f);
+                }
+                else
+                {
+                    GameController.GetInstance().ShowInfoOnScreen(youNeedEat);
+                }
             }
             else
             {

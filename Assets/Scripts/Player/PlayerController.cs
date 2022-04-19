@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
 
     private bool isCanMove;
     private bool isCanJump;
-    [SerializeField] private bool isPickUpLittleAsteroid;
+    [SerializeField] private bool isPickUpLittleAsteroid, isPickUpLittleLizard;
     [SerializeField] private float speedDino;
 
     [SerializeField] private GameObject asteroid;
@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
         isCanMove = true;
         isCanJump = false;
         isPickUpLittleAsteroid = false;
+        isPickUpLittleLizard = false;
     }
 
     private void Update()
@@ -83,7 +84,7 @@ public class PlayerController : MonoBehaviour
         GameController.GetInstance().AudioGame(audioJump);
         anim_Dino.SetTrigger(isJump);
         rb_Dino.AddForce((transform.up + transform.forward) * 5.0f, ForceMode.Impulse);
-        StartCoroutine(RecoverMove());
+        StartRecoverMove();
     }
 
     // вариант 1
@@ -128,6 +129,20 @@ public class PlayerController : MonoBehaviour
         return isCanMove;
     }
 
+    // при поедании ящериц вызывается в lizardcontroller
+    public bool PickUpLizard(bool variable, Transform positionLizard)
+    {
+        // зададим поворот в сторону поднимаемого объекта
+        Vector3 relativePosition = positionLizard.position - transform.position;
+        Quaternion rotationToLizard = Quaternion.LookRotation(relativePosition, Vector3.up);
+        transform.rotation = rotationToLizard;
+
+        isCanMove = variable;
+        anim_Dino.SetTrigger(isPickUp);
+
+        return isCanMove;
+    }
+
     public bool IsCanJump(bool variable)
     {
         isCanJump = variable;
@@ -137,6 +152,16 @@ public class PlayerController : MonoBehaviour
     public bool IsPickUpLittleAsteroid()
     {
         return isPickUpLittleAsteroid;
+    }
+
+    public bool IsPickUpLittleLizard()
+    {
+        return isPickUpLittleLizard;
+    }
+
+    public void StartRecoverMove()
+    {
+        StartCoroutine(RecoverMove());
     }
 
     IEnumerator RecoverMove()
@@ -168,7 +193,7 @@ public class PlayerController : MonoBehaviour
         isCanMove = false;
         anim_Dino.SetTrigger(isThrow);
         StartCoroutine(DelayThrow());
-        StartCoroutine(RecoverMove());
+        StartRecoverMove();
 
         return isPickUpLittleAsteroid;
     }

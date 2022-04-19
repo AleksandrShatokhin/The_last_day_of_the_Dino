@@ -33,11 +33,23 @@ public class LizardController : MonoBehaviour
         }
     }
 
+    void EatLizard(PlayerController player)
+    {
+        agent_Lizard.isStopped = true;
+
+        player.PickUpLizard(false, this.gameObject.transform);
+        player.StartRecoverMove();
+
+        GameController.GetInstance().AddFeelingFull();
+
+        Destroy(this.gameObject, 1.3f);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            other.gameObject.GetComponent<PlayerController>().EatLizard(this.gameObject.transform);
+            EatLizard(other.GetComponent<PlayerController>());
         }
     }
 }
