@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class MainUI : MonoBehaviour
 {
+    private PlayerController player_controller;
+
     [SerializeField] private Slider distanceToAsteroid, feelingFull;
 
     [SerializeField] private Image colorFillSilder;
@@ -22,6 +24,8 @@ public class MainUI : MonoBehaviour
 
     void Start()
     {
+        player_controller = GameObject.Find("Player").GetComponent<PlayerController>();
+
         infoText.text = null;
         textAsteroidInVolcano.text = asteroidInVolcano.ToString();
 
@@ -85,7 +89,7 @@ public class MainUI : MonoBehaviour
     // при выстреле добавляем к слайдеру дистанцию
     public void ChangeSliderAsteroid(int quantity)
     {
-        distanceToAsteroid.value += quantity * 8;
+        distanceToAsteroid.value += quantity * 9;
     }
 
     // при необходимости проверить значение сытости

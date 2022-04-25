@@ -20,8 +20,8 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
-        transform.position = new Vector3(target.position.x, transform.position.y, offset.z);
-        transform.LookAt(target.position);
+         transform.position = new Vector3(target.position.x, transform.position.y, offset.z);
+         transform.LookAt(target.position);
     }
 
     public void ShakeCamera()

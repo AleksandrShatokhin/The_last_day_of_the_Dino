@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private AudioClip audioCastAsteroid, audioJump;
 
+    private bool isPauseMode;
     private bool isCanMove;
     private bool isCanJump;
     [SerializeField] private bool isPickUpLittleAsteroid, isPickUpLittleLizard;
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
         rb_Dino = GetComponent<Rigidbody>();
         anim_Dino = GetComponentInChildren<Animator>();
 
+        isPauseMode = false;
         isCanMove = true;
         isCanJump = false;
         isPickUpLittleAsteroid = false;
@@ -39,6 +41,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isCanJump)
         {
             Jump();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseMode();
         }
     }
 
@@ -196,5 +203,19 @@ public class PlayerController : MonoBehaviour
         StartRecoverMove();
 
         return isPickUpLittleAsteroid;
+    }
+
+    private void PauseMode()
+    {
+        if (!isPauseMode)
+        {
+            isPauseMode = true;
+            GameController.GetInstance().PauseModeOn();
+        }
+        else
+        {
+            isPauseMode = false;
+            GameController.GetInstance().PauseModeOff();
+        }
     }
 }

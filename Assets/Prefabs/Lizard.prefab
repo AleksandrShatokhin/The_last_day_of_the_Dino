@@ -1855,6 +1855,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd49dc9e1e19a43498c3b2fe4e5828ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioEatLizard: {fileID: 8300000, guid: 54b121c09d8e66347b8e84aee500854e, type: 3}
 --- !u!135 &5780440566062281244
 SphereCollider:
   m_ObjectHideFlags: 0

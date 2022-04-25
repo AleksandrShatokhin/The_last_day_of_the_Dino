@@ -19,7 +19,9 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private GameObject mainui;
     [SerializeField] private GameObject cameraMain;
-    [SerializeField] private GameObject windowEndGame;
+    [SerializeField] private GameObject windowEndGame, windowPause;
+
+    private bool isEndGame;
 
     private void Awake()
     {
@@ -28,6 +30,8 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        isEndGame = false;
+
         Time.timeScale = 1.0f;
 
         gameAudio = GetComponent<AudioSource>();
@@ -97,10 +101,38 @@ public class GameController : MonoBehaviour
         Instantiate(windowEndGame, transform.position, transform.rotation);
         AudioGame(audioEndGame);
         Time.timeScale = 0.0f;
+        MainAudioOff();
+        isEndGame = true;
     }
 
     public void AudioGame(AudioClip audio)
     {
         gameAudio.PlayOneShot(audio, 0.5f);
+    }
+
+    // включение/выключение главной фоновой музыки
+    public void MainAudioOn() => cameraMain.GetComponent<AudioSource>().Play();
+    public void MainAudioOff() => cameraMain.GetComponent<AudioSource>().Stop();
+
+    public void PauseModeOn()
+    {
+        if (!isEndGame)
+        {
+            Time.timeScale = 0.0f;
+            Instantiate(windowPause, transform.position, transform.rotation);
+            mainui.SetActive(false);
+        }
+    }
+
+    public void PauseModeOff()
+    {
+        if (!isEndGame)
+        {
+            GameObject pause = GameObject.Find("PauseMode(Clone)");
+
+            Time.timeScale = 1.0f;
+            Destroy(pause);
+            mainui.SetActive(true);
+        }
     }
 }

@@ -8,6 +8,7 @@ public class LizardController : MonoBehaviour
     private NavMeshAgent agent_Lizard;
 
     private SpawnLizard creatorRandomPoint;
+    [SerializeField] AudioClip audioEatLizard;
 
 
     void Start()
@@ -42,6 +43,7 @@ public class LizardController : MonoBehaviour
 
         GameController.GetInstance().AddFeelingFull();
 
+        GameController.GetInstance().AudioGame(audioEatLizard);
         Destroy(this.gameObject, 1.3f);
     }
 
