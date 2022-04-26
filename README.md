@@ -26,4 +26,4 @@ __2. ЭКРАН ИГРЫ__
 ![Screen3](https://user-images.githubusercontent.com/47788812/165244029-aa659a71-82df-488f-9907-7527cb60977c.PNG)
 Так же в игре есть несколько небольших подсказок. Текст будет появляться внизу экрана. 
 
-Игру можно скачать по ссылке ![тут](https://aleksandrshatokhin.itch.io/the-last-day-of-the-dino).
+[Игру можно скачать по ссылке](https://aleksandrshatokhin.itch.io/the-last-day-of-the-dino).
