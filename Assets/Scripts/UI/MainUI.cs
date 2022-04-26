@@ -12,6 +12,8 @@ public class MainUI : MonoBehaviour
     [SerializeField] private Image colorFillSilder;
     private Color currentColor;
 
+    [SerializeField] Button jumpButton;
+
     [SerializeField] private Text timerText;
     [SerializeField] private Text infoText;
     [SerializeField] private Text textAsteroidInVolcano;
@@ -25,6 +27,9 @@ public class MainUI : MonoBehaviour
     void Start()
     {
         player_controller = GameObject.Find("Player").GetComponent<PlayerController>();
+
+        jumpButton.onClick.AddListener(JumpButton);
+        JumpButtonOff();
 
         infoText.text = null;
         textAsteroidInVolcano.text = asteroidInVolcano.ToString();
@@ -127,4 +132,11 @@ public class MainUI : MonoBehaviour
 
         return textAsteroidInVolcano;
     }
+
+    private void JumpButton()
+    {
+        player_controller.Jump();
+    }
+    public void JumpButtonOff() => jumpButton.gameObject.SetActive(false);
+    public void JumpButtonOn() => jumpButton.gameObject.SetActive(true);
 }

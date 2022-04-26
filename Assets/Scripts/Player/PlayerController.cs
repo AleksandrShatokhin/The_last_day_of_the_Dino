@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private AudioClip audioCastAsteroid, audioJump;
 
+    private GameObject joystick;
+
     private bool isPauseMode;
     private bool isCanMove;
     private bool isCanJump;
@@ -28,6 +30,8 @@ public class PlayerController : MonoBehaviour
     {
         rb_Dino = GetComponent<Rigidbody>();
         anim_Dino = GetComponentInChildren<Animator>();
+
+        joystick = GameObject.Find("JoyStick");
 
         isPauseMode = false;
         isCanMove = true;
@@ -54,6 +58,7 @@ public class PlayerController : MonoBehaviour
         if (isCanMove)
         {
             MoveDino();
+            joystick.GetComponent<UIMove>().CheckTouch(speedDino);
         }
     }
 
@@ -83,6 +88,11 @@ public class PlayerController : MonoBehaviour
         {
             anim_Dino.SetBool(isRun, false);
         }
+    }
+
+    public Animator AnimatorDino()
+    {
+        return anim_Dino;
     }
 
     public void Jump()

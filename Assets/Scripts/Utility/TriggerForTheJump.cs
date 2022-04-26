@@ -9,6 +9,7 @@ public class TriggerForTheJump : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             other.GetComponent<PlayerController>().IsCanJump(true);
+            GameController.GetInstance().GetMainUI().JumpButtonOn();
         }
     }
 
@@ -17,6 +18,7 @@ public class TriggerForTheJump : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             other.GetComponent<PlayerController>().IsCanJump(false);
+            GameController.GetInstance().GetMainUI().JumpButtonOff();
         }
     }
 }

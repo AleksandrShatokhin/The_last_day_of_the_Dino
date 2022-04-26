@@ -66,11 +66,11 @@ public class GameController : MonoBehaviour
             triggerThrow.GetComponent<BoxCollider>().enabled = true;
             triggerJump.GetComponent<BoxCollider>().enabled = false;
             triggerClick.GetComponent<BoxCollider>().enabled = false;
-            GetMainUI();
+            GetMainUIForChangeSliderAsteroid();
         }
     }
 
-    public void GetMainUI()
+    public void GetMainUIForChangeSliderAsteroid()
     {
         mainui.GetComponent<MainUI>().ChangeSliderAsteroid(5);
     }
@@ -134,5 +134,10 @@ public class GameController : MonoBehaviour
             Destroy(pause);
             mainui.SetActive(true);
         }
+    }
+
+    public MainUI GetMainUI()
+    {
+        return mainui.GetComponent<MainUI>();
     }
 }
