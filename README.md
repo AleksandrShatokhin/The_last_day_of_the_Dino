@@ -1,3 +1,4 @@
+<a id="anchor"></a>
 # The last day of the Dino
 ---
 ![ThemeGameWithName](https://user-images.githubusercontent.com/47788812/165139954-505609f3-4fce-4187-aee9-e584a7bcf3a1.png)
@@ -26,4 +27,13 @@ __2. ЭКРАН ИГРЫ__
 ![Screen3](https://user-images.githubusercontent.com/47788812/165244029-aa659a71-82df-488f-9907-7527cb60977c.PNG)
 Так же в игре есть несколько небольших подсказок. Текст будет появляться внизу экрана. 
 
+__3. КОРОТКОЕ ПРИМЕЧАНИЕ__
+
+В игре используются только самостоятельно разработанные текстуры, модельки объектов, персонажей, предметов.
+
+__4. СКАЧАТЬ__
+
+Прототип игры был размещен на платформе itch.io
 [Игру можно скачать по ссылке](https://aleksandrshatokhin.itch.io/the-last-day-of-the-dino).
+
+[В начало](#anchor)
